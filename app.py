@@ -39,7 +39,7 @@ def main():
                                 price = float(input("Enter the price:- "))
                                 controller.add_product(admin, name, price)
                             case 2:
-                                controller.get_products()
+                                controller.get_product()
                             case 3:
                                 name = input("Enter the name of product you want to delete:- ")
                                 controller.remove_product(name)
@@ -55,8 +55,9 @@ def main():
                 name = input("Enter name:- ")
                 username = input("Enter username:- ")
                 controller.add_user(name, username)
+                user = controller.get_user(username)
 
-                if username in controller.users:
+                if username == user:
                     while True:
                         print()
                         print("1. View Products")
@@ -70,7 +71,7 @@ def main():
 
                         match option:
                             case 1:
-                                controller.get_products()
+                                print(controller.get_product())
                             case 2:
                                 pass
                             case 3:

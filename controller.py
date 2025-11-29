@@ -27,7 +27,7 @@ class Controller:
     def add_user(self, name, username):
         if username not in self.users:
             user = User(name, username)
-            self.users.append({username:user})
+            self.users.append({username:name})
             print(self.users)
         else:
             print("User Already Exists!")
@@ -38,21 +38,39 @@ class Controller:
             if username in user:
                 print("Username:- ", user[username])
                 return user[username]
-        print("User Not Found!")
+            else:
+                print("User Not Found!")
 
 
-    # User remove
-
+    def remove_user(self, username):
+        for user in self.users:
+            if username in user:
+                self.users.pop(user[username])
+                print(self.users)
+            else:
+                print("User Not Found!")
+                
 
     # Products Operation
     def add_product(self, admin, name, price):
         if admin == self.admin:
             product = Product(name, price)
-            self.products.append(product)
+            self.products.append(product.add_product(name, price))
+            print("Product Added Successfully!")
             print(self.products)
         else:
             print("Invalid Admin!")
 
-    # get
-    # remove
+
+    def get_product(self):
+        return self.products
+    
+    
+    def remove_product(self, name):
+        for p in self.products:
+            if name in p:
+                self.products.pop(name)
+                print("Product Removed Successfully!")
+            else:
+                print("Product Not Found!")
  
