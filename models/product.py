@@ -1,5 +1,5 @@
 class Product:
-    products=[]
+    # products=[]
 
     def __init__(self, name="", price=0.0):
         self.name = name
@@ -7,8 +7,11 @@ class Product:
 
     
     def add_product(self, name, price):
-        self.products.append((name, price))
-        
+        # self.products.append((name, price))
+        self.name = name
+        self.price = price
+        return (self.name, self.price)
+ 
  
     def get_products(self):
         print("----- Products -----")

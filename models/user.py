@@ -1,5 +1,5 @@
 class User:
-    users = []
+    # users = []
 
     def __init__(self, name="", username=""):
         self.name = name
@@ -7,8 +7,9 @@ class User:
 
 
     def set_user(self, name, username):
-        self.users.append({username : name})
-        print(self.users, "User Added Successfully!")
+        self.name = name
+        self.username = username
+        return {username:name}
 
 
     def get_user(self, username):

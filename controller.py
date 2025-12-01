@@ -26,8 +26,8 @@ class Controller:
     # Users Operation
     def add_user(self, name, username):
         if username not in self.users:
-            user = User(name, username)
-            self.users.append({username:name})
+            user = User()
+            self.users.append(user.set_user(username, name))
             print(self.users)
         else:
             print("User Already Exists!")
@@ -36,17 +36,17 @@ class Controller:
     def get_user(self, username):
         for user in self.users:
             if username in user:
-                print("Username:- ", user[username])
+                # print("Username:- ", user[username])
                 return user[username]
             else:
                 print("User Not Found!")
 
 
     def remove_user(self, username):
-        for user in self.users:
+        for i, user in enumerate(self.users):
             if username in user:
-                self.users.pop(user[username])
-                print(self.users)
+                self.users.pop(i)
+                # print(self.users)
             else:
                 print("User Not Found!")
                 
@@ -54,7 +54,7 @@ class Controller:
     # Products Operation
     def add_product(self, admin, name, price):
         if admin == self.admin:
-            product = Product(name, price)
+            product = Product()
             self.products.append(product.add_product(name, price))
             print("Product Added Successfully!")
             print(self.products)
@@ -63,14 +63,15 @@ class Controller:
 
 
     def get_product(self):
-        return self.products
+        for i, (name, price) in enumerate(self.products, start=1):
+            print(f"{i}. {name} - ₹{price}")
     
     
     def remove_product(self, name):
-        for p in self.products:
-            if name in p:
-                self.products.pop(name)
+        for i, p in enumerate(self.products):
+            if p[0] == name:
+                self.products.pop(i)
                 print("Product Removed Successfully!")
-            else:
-                print("Product Not Found!")
+                return
+        print("Product Not Found!")
  

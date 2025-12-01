@@ -71,7 +71,7 @@ def main():
 
                         match option:
                             case 1:
-                                print(controller.get_product())
+                                controller.get_product()
                             case 2:
                                 pass
                             case 3:
