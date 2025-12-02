@@ -1,11 +1,12 @@
-from models.user import User
-from models.product import Product
-from controller import Controller
+from controller.user import UserController
+from controller.product import ProductController
+from controller.cart import CartController
 
 #-------- Online Ordering (Mini Amazon) (Oops & Solid Based)--------#
 def main():
-    controller = Controller()
-    p = Product()
+    user = UserController()
+    product = ProductController()
+    cart = CartController()
 
     while True:
         print()
@@ -19,10 +20,12 @@ def main():
 
         match choice:
             case 1:
-                admin = input("Enter the name:- ")
-                controller.add_admin(admin)
+                admin_name = input("Enter the name:- ")
+                admin_username = input("Enter the username:- ")
+                user.add_user(admin_name, admin_username, "Admin")
+                admin = user.get_user(admin_username)
 
-                if admin == controller.admin:
+                if admin_username == admin:
                     while True:
                         print()
                         print("1. Add Product")
@@ -37,14 +40,14 @@ def main():
                             case 1:
                                 name = input("Enter the product name:- ")
                                 price = float(input("Enter the price:- "))
-                                controller.add_product(admin, name, price)
+                                product.add_product(name, price)
                             case 2:
-                                controller.get_product()
+                                product.get_product()
                             case 3:
                                 name = input("Enter the name of product you want to delete:- ")
-                                controller.remove_product(name)
+                                product.remove_product(name)
                             case 4:
-                                controller.remove_admin(admin)
+                                user.remove_user(admin_username)
                                 break
                             case _:
                                 print("Invalid Option!")
@@ -54,10 +57,10 @@ def main():
             case 2:
                 name = input("Enter name:- ")
                 username = input("Enter username:- ")
-                controller.add_user(name, username)
-                user = controller.get_user(username)
+                user.add_user(name, username, "User")
+                u = user.get_user(username)
 
-                if username == user:
+                if username == u:
                     while True:
                         print()
                         print("1. View Products")
@@ -71,15 +74,17 @@ def main():
 
                         match option:
                             case 1:
-                                controller.get_product()
+                                product.get_product()
                             case 2:
-                                pass
+                                product_id = int(input("Enter the product_id you want add:- "))
+                                quantity = int(input("Enter the quantity of product:- "))
+                                cart.add_to_cart(product_id, quantity)
                             case 3:
-                                pass
+                                cart.get_cart()
                             case 4:
                                 pass
                             case 5:
-                                controller.remove_user(username)
+                                user.remove_user(username)
                                 break
                             case _:
                                 print("Invalid Option!")
