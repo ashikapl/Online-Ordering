@@ -1,12 +1,14 @@
 from controller.user import UserController
 from controller.product import ProductController
 from controller.cart import CartController
+from controller.order import OrderController
 
 #-------- Online Ordering (Mini Amazon) (Oops & Solid Based)--------#
 def main():
     user = UserController()
     product = ProductController()
     cart = CartController()
+    order = OrderController()
 
     while True:
         print()
@@ -82,7 +84,10 @@ def main():
                             case 3:
                                 cart.get_cart()
                             case 4:
-                                pass
+                                item = input("Enter the cart id to place order:- ")
+                                # total = order.total_amount(item)
+                                payment_method = input("Enter the payment method:- ")
+                                order.place_order(item, 0, payment_method)
                             case 5:
                                 user.remove_user(username)
                                 break
